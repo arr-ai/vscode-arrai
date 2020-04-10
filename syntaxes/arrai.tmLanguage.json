@@ -1,32 +1,313 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "arrai",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.arrai",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.arrai",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.arrai",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": "source.arrai"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "arrai",
+  "patterns": [
+    {
+      "include": "#exprs"
+    },
+    {
+      "include": "#comments"
+    }
+  ],
+  "repository": {
+    "exprs": {
+      "patterns": [
+        {
+          "begin": "(?<!\\$){",
+          "end": "}",
+          "name": "meta.dict.arrai",
+          "patterns": [
+            {
+              "include": "#exprs"
+            }
+          ]
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "comment": "pattern works for function argument too",
+          "name": "meta.tuple.arrai",
+          "patterns": [
+            {
+              "include": "#exprs"
+            }
+          ]
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "name": "meta.array.arrai",
+          "patterns": [
+            {
+              "include": "#exprs"
+            }
+          ]
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#pkg_path"
+        },
+        {
+          "include": "#names"
+        },
+        {
+          "include": "#ident"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.arrai",
+          "match": "\\b(if|else|let)\\b"
+        },
+        {
+          "name": "keyword.operator.word.arrai",
+          "match": "\\b(count|with|without|orderby|order|where|sum|max|mean|median|min|nest|unnest)\\b"
+        },
+        {
+          "name": "keyword.operator.math.arrai",
+          "match": "(\\+|\\-|\\*|\\/|\\^)"
+        },
+        {
+          "name": "keyword.operator.binoperation.arrai",
+          "match": "(->\\*|:>|=>|>>|\\|\\||&&|&~|&|~|[-<][-&][->]|//|[*/%]|\\+\\+|[+|]|-%?|!?(<:|<>?=?|>=?|=))"
+        },
+        {
+          "name": "keyword.operator.unoperation.arrai",
+          "match": "((:>|=>|>>|[-+!*^])+)"
+        },
+        {
+          "name": "keyword.other.binding.arrai",
+          "match": "->"
+        },
+        {
+          "name": "keyword.other.import.arrai",
+          "match": "//"
+        },
+        {
+          "name": "keyword.other.argument.arrai",
+          "match": "\\\\"
+        },
+        {
+          "name": "constant.language.arrai",
+          "match": "\\b(true|false)\\b"
+        }
+      ]
+    },
+    "comments": {
+      "name": "comment.line.number-sign.arrai",
+      "match": "#[^\n]+"
+    },
+    "ident": {
+      "name": "entity.name.ident.arrai",
+      "match": "(\\.|[$@A-Za-z_][0-9$@A-Za-z_]*)"
+    },
+    "names": {
+      "begin": "\\|",
+      "end": "\\|",
+      "name": "meta.names.arrai",
+      "patterns": [
+        {
+          "include": "ident"
+        }
+      ]
+    },
+    "numbers": {
+      "match": "\\-?(\\d+(.\\d+)?|\\.\\d+)([Ee][-+]?\\d+)?",
+      "name": "constant.numeric.arrai"
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.arrai",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.arrai",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.backtick.arrai",
+          "begin": "`",
+          "end": "(?<!`)`(?!`)",
+          "patterns": [
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "``"
+            }
+          ]
+        },
+        {
+          "name": "meta.template.double-quoted.arrai",
+          "begin": "(\\$)(\")",
+          "end": "(\")",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.template.arrai"
+            },
+            "2": {
+              "name": "string.quoted.double.template.arrai"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "string.quoted.double.template.arrai"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#sexpr"
+            },
+            {
+              "match": "((\\$(?!\\{))|[^\"])",
+              "name": "string.quoted.double.template.arrai"
+            },
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "meta.tempalte.single-quoted.arrai",
+          "begin": "(\\$)(')",
+          "end": "(')",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.template.arrai"
+            },
+            "2": {
+              "name": "string.quoted.single.template.arrai"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "string.quoted.single.template.arrai"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#sexpr"
+            },
+            {
+              "match": "((\\$(?!\\{))|[^'])",
+              "name": "string.quoted.single.template.arrai"
+            },
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "meta.template.backtick.arrai",
+          "begin": "(\\$)(`)",
+          "end": "(?<!`)(`)(?!`)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.template.arrai"
+            },
+            "2": {
+              "name": "string.quoted.backtick.template.arrai"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "string.quoted.backtick.template.arrai"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#sexpr"
+            },
+            {
+              "match": "((\\$(?!\\{))|[^`])",
+              "name": "string.quoted.single.template.arrai"
+            },
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "``"
+            }
+          ]
+        }
+      ]
+    },
+    "sexpr": {
+      "begin": "(\\${)",
+      "end": "(})",
+      "name": "meta.sexpr.arrai",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.template.arrai"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.template.arrai"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#exprs"
+        },
+        {
+          "begin": "(?=:)",
+          "end": "(?=[ \t]*})",
+          "name": "meta.sexpr.control.arrai",
+          "patterns": [
+            {
+              "name": "constant.character.escape.arrai",
+              "match": "\\\\."
+            },
+            {
+              "include": "#comments"
+            },
+            {
+              "match": "(?<=:)\\s*[-+#*\\. 0-9a-z]*",
+              "include": "support.other.sexpr.control.arrai"
+            },
+            {
+              "name": "keyword.other.control-separator.arrai",
+              "match": "\\s*:\\s*"
+            },
+            {
+              "match": "((?=:)\\s*((?=\\\\.)|[^\\\\:}])*){,2}",
+              "name": "support.other.sexpr.control.arrai"
+            }
+          ]
+        }
+      ]
+    },
+    "pkg_path": {
+      "match": "/[a-zA-Z0-9._]+(/[a-zA-Z0-9._]+)*",
+      "name": "variable.other.external.arrai"
+    }
+  },
+  "scopeName": "source.arrai"
 }
