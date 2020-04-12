@@ -2,7 +2,7 @@
     "name": "vscode-arrai",
     "displayName": "vscode-arrai",
     "description": "VS Code Extension for the programming language Arrai",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.44.0"
     },
