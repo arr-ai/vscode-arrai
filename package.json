@@ -1,13 +1,13 @@
 {
     "name": "vscode-arrai",
-    "displayName": "vscode-arrai",
+    "displayName": "arrai",
     "publisher": "arr-ai",
     "repository": {
         "type": "git",
         "url": "https://github.com/arr-ai/vscode-arrai.git"
     },
     "description": "VS Code Extension for the programming language Arrai",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "engines": {
         "vscode": "^1.44.0"
     },
