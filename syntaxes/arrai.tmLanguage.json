@@ -82,7 +82,7 @@
         },
         {
           "name": "keyword.operator.binoperation.arrai",
-          "match": "(->\\*|:>|=>|>>|\\|\\||&&|&~|&|~|[-<][-&][->]|//|[*/%]|\\+\\+|[+|]|-%?|!?(<:|<>?=?|>=?|=))"
+          "match": "(->\\*|:>|=>|>>>|>>|\\|\\||&&|&~|&|~|[-<][-&][->]|//|[*/%]|\\+\\+|[+|]|-%?|!?(<:|<>?=?|>=?|=))"
         },
         {
           "name": "keyword.operator.unoperation.arrai",
@@ -98,6 +98,7 @@
         },
         {
           "name": "keyword.other.argument.arrai",
+          "comment": "also works as the offset operator",
           "match": "\\\\"
         },
         {
