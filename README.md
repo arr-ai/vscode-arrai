@@ -16,6 +16,4 @@ npm install
 
 ## Release Notes
 
-### 0.1.0
-
-Basic syntax highlighter.
+You can take a look at the [changelog](https://github.com/arr-ai/vscode-arrai/blob/master/CHANGELOG.md)
