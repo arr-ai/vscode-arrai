@@ -44,6 +44,16 @@
           ]
         },
         {
+          "begin": "<<",
+          "end": "(?<!>)>>(?!>)",
+          "name": "meta.array.bytes.arrai",
+          "patterns": [
+            {
+              "include": "#exprs"
+            }
+          ]
+        },
+        {
           "include": "#strings"
         },
         {
@@ -51,6 +61,9 @@
         },
         {
           "include": "#numbers"
+        },
+        {
+          "include": "#char"
         },
         {
           "include": "#keywords"
@@ -70,11 +83,11 @@
       "patterns": [
         {
           "name": "keyword.control.arrai",
-          "match": "\\b(if|else|let)\\b"
+          "match": "\\b(if|else|let|cond)\\b"
         },
         {
           "name": "keyword.operator.word.arrai",
-          "match": "\\b(count|with|without|orderby|order|where|sum|max|mean|median|min|nest|unnest)\\b"
+          "match": "\\b(single|count|with|without|orderby|order|where|sum|max|mean|median|min|nest|unnest)\\b"
         },
         {
           "name": "keyword.operator.math.arrai",
@@ -100,6 +113,10 @@
           "name": "keyword.other.argument.arrai",
           "comment": "also works as the offset operator",
           "match": "\\\\"
+        },
+        {
+          "name": "keyword.other.safe_access.arrai",
+          "match": "(:|\\?)"
         },
         {
           "name": "constant.language.arrai",
@@ -128,6 +145,25 @@
     "numbers": {
       "match": "\\-?(\\d+(.\\d+)?|\\.\\d+)([Ee][-+]?\\d+)?",
       "name": "constant.numeric.arrai"
+    },
+    "char": {
+      "patterns": [
+        {
+          "match": "(%)(\\\\.)",
+          "captures": {
+            "1": {
+              "name": "constant.character.arrai"
+            },
+            "2": {
+              "name": "constant.character.escape.arrai"
+            }
+          }
+        },
+        {
+          "match": "%.",
+          "name": "constant.character.arrai"
+        }
+      ]
     },
     "strings": {
       "patterns": [
