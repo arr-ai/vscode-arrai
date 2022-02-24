@@ -1,5 +1,23 @@
 # Change Log
 
+### 0.5.0
+
+Added features for the following syntaxes:
+
+- Highlighting for `filter`
+- Add `<<...>>` as a known bracket pair
+- Fix comment syntax highlighter
+
+### 0.4.0
+
+Added highlighting for the following syntaxes:
+
+- `single`
+- `<<...>>` (byte syntax)
+- `cond`
+- `%.` (char syntax)
+- `a.b?:42` (safe access)
+
 ### 0.3.0
 
 - Added highlighting for the `>>>` operator.
