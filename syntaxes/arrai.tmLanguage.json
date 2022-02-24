@@ -87,7 +87,7 @@
         },
         {
           "name": "keyword.operator.word.arrai",
-          "match": "\\b(single|count|with|without|orderby|order|where|sum|max|mean|median|min|nest|unnest)\\b"
+          "match": "\\b(single|filter|count|with|without|orderby|order|where|sum|max|mean|median|min|nest|unnest)\\b"
         },
         {
           "name": "keyword.operator.math.arrai",
@@ -126,7 +126,7 @@
     },
     "comments": {
       "name": "comment.line.number-sign.arrai",
-      "match": "#[^\n]+"
+      "match": "#[^\n]*"
     },
     "ident": {
       "name": "entity.name.ident.arrai",
