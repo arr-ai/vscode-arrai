@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.6.0
+
+- Reverted `<<...>>` bracket pair colorizer to fix a bug with `>>` operator highlighting.
+
 ### 0.5.0
 
 Added features for the following syntaxes:
